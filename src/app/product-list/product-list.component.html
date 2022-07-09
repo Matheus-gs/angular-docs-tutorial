@@ -1,0 +1,36 @@
+<h2>Products</h2>
+
+<div *ngFor="let product of products">
+  <h3>
+    <!--  Nome do produto -->
+    <a [title]="product.name + ' details'">
+      {{ product.name }}
+    </a>
+
+    <!--  Descrição do produto -->
+    <p *ngIf="product.description; else noDescription">
+      {{ product.description }}
+    </p>
+
+    <!-- Pipe para formatação financeira -->
+    <p>{{ product.price | currency: 'BRL' }}</p>
+
+    <!-- Se não tiver descrição então isso será exibido -->
+    <ng-template #noDescription>
+      <p>Sem descrição</p>
+    </ng-template>
+
+    <!-- Share Button -->
+    <button type="button" (click)="share(product.name)">Share</button>
+
+    <!-- Notify Me Button -->
+    <app-product-alerts [product]="product" (notify)="onNotify()">
+    </app-product-alerts>
+  </h3>
+</div>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->
